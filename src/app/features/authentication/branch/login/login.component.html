@@ -1,0 +1,56 @@
+<main class="w-full h-full flex items-center justify-center">
+  <div class="container bg-bgSecondary max-w-[600px] px-5 py-7 rounded-md">
+    <h1 class="text-3xl text-text font-bold mb-3">Sign in</h1>
+    <p class="text-gray mb-7">Enter your email and password to sign in!</p>
+    <form
+      class="flex flex-col gap-y-4"
+      [formGroup]="loginForm"
+      (submit)="onSubmit()"
+    >
+      @if (apiErrorMessage()) {
+        <mat-error class="text-center">{{ apiErrorMessage() }}</mat-error>
+      }
+      <mat-form-field class="my-input">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          required
+          placeholder="email@example.com"
+          formControlName="email"
+          (blur)="updateErrorMessages()"
+        />
+        @if (loginForm.controls.email.invalid) {
+          <mat-error>{{ errorMessages().email }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          required
+          placeholder="*****"
+          formControlName="password"
+          [type]="hiddenPassword() ? 'password' : 'text'"
+          (blur)="updateErrorMessages()"
+        />
+        <button
+          matSuffix
+          mat-icon-button
+          type="button"
+          (click)="toggleVisibility()"
+        >
+          <mat-icon>{{
+            hiddenPassword() ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        @if (loginForm.controls.password.invalid) {
+          <mat-error>{{ errorMessages().password }}</mat-error>
+        }
+      </mat-form-field>
+      <button mat-flat-button type="submit" [disabled]="loginForm.invalid">
+        Sign in
+      </button>
+    </form>
+  </div>
+  <app-loading [loading]="isLoading()"></app-loading>
+</main>
