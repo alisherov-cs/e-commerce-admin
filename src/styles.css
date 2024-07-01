@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-text: #2b3674;
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f4f7fe;
+  --color-gray: #a3aed0;
+  --color-primary: #4318ff;
+  --color-success: #05cd99;
+  --color-danger: #ee5d50;
+  --color-warning: #ffce20;
+  --color-border: #e9edf7;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-snack-bar-container {
+  @apply rounded;
+}
+
+.mat-mdc-snackbar-surface {
+  @apply text-center !bg-success text-white min-w-[200px];
+}
+
+.mat-mdc-snack-bar-label {
+  @apply font-bold;
+}
+
+.mat-mdc-snack-bar-container.error .mat-mdc-snackbar-surface {
+  @apply !bg-danger;
+}
