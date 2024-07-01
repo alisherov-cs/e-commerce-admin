@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit {
         .login(this.loginForm.getRawValue() as LoginInputInterface)
         .then(() => {
           this.router.navigate(['/']);
+          this.loginForm.reset();
           this.snackBar.open("You're logged in!");
         })
         .catch(() => {
@@ -122,7 +123,6 @@ export class LoginComponent implements OnInit {
           });
         })
         .finally(() => {
-          this.loginForm.reset();
           this.isLoading.set(false);
           clearTimeout(isLoadingTimoutId);
         });
