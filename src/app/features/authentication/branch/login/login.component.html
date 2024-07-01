@@ -8,9 +8,11 @@
       (submit)="onSubmit()"
     >
       @if (apiErrorMessage()) {
-        <mat-error class="text-center">{{ apiErrorMessage() }}</mat-error>
+        <mat-error class="text-center" data-test-id="api-error-message">{{
+          apiErrorMessage()
+        }}</mat-error>
       }
-      <mat-form-field class="my-input">
+      <mat-form-field data-test-id="email-input">
         <mat-label>Enter your email</mat-label>
         <input
           matInput
@@ -20,16 +22,19 @@
           (blur)="updateErrorMessages()"
         />
         @if (loginForm.controls.email.invalid) {
-          <mat-error>{{ errorMessages().email }}</mat-error>
+          <mat-error data-test-id="email-input-error">{{
+            errorMessages().email
+          }}</mat-error>
         }
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field data-test-id="password-input">
         <mat-label>Enter your password</mat-label>
         <input
           matInput
           required
           placeholder="*****"
           formControlName="password"
+          data-test-id="password-input-field"
           [type]="hiddenPassword() ? 'password' : 'text'"
           (blur)="updateErrorMessages()"
         />
@@ -37,6 +42,7 @@
           matSuffix
           mat-icon-button
           type="button"
+          data-test-id="toggle-visibility"
           (click)="toggleVisibility()"
         >
           <mat-icon>{{
@@ -44,10 +50,17 @@
           }}</mat-icon>
         </button>
         @if (loginForm.controls.password.invalid) {
-          <mat-error>{{ errorMessages().password }}</mat-error>
+          <mat-error data-test-id="password-input-error">{{
+            errorMessages().password
+          }}</mat-error>
         }
       </mat-form-field>
-      <button mat-flat-button type="submit" [disabled]="loginForm.invalid">
+      <button
+        mat-flat-button
+        type="submit"
+        data-test-id="submit-button"
+        [disabled]="loginForm.invalid"
+      >
         Sign in
       </button>
     </form>
